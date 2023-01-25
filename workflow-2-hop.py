@@ -27,7 +27,7 @@ dag = DAG(
 job = HopWorkflowOperator(
     dag=dag,
     task_id='tsk-workflow-2-hop',
-    workflow='INTEGRCAO/workflow.hwf',
+    workflow='INTEGRACAO/workflow.hwf',
     project_name='LIVE',
     log_level= 'Basic'
 )
