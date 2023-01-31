@@ -9,7 +9,7 @@ default_args = {
     'owner': 'Agroterenas',
     'depends_on_past': False,
     'start_date': datetime.today() - timedelta(days=1),  #datetime(2021, 3, 13, 0, tzinfo=local_tz), datetime(yyyy,mm,dd,hh,mn,sc, tzinfo=local_tz),
-    'email': ['admin@gmail.com'],
+    'email': ['paulo.ricardo@agroterenas.com.br'],
     'email_on_failure': False,
     'email_on_retry': False,
     'retries': 0,
