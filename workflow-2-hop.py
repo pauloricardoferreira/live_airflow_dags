@@ -9,7 +9,7 @@ default_args = {
     'owner': 'Agroterenas',
     'depends_on_past': False,
     'start_date': datetime.today() - timedelta(days=1),  #datetime(2021, 3, 13, 0, tzinfo=local_tz), datetime(yyyy,mm,dd,hh,mn,sc, tzinfo=local_tz),
-    'email': ['paulo.ricardo@agroterenas.com.br'],
+    'email': ['admin@gmail.com'],
     'email_on_failure': False,
     'email_on_retry': False,
     'retries': 0,
@@ -29,6 +29,5 @@ job = HopWorkflowOperator(
     task_id='tsk-workflow-2-hop',
     workflow='INTEGRACAO/workflow.hwf',
     project_name='LIVE',
-    pipeline_configuration='pipeline-server',
     log_level= 'Basic'
 )

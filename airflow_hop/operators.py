@@ -54,7 +54,6 @@ class HopWorkflowOperator(HopBaseOperator):
     def __init__(self,
                  workflow,
                  project_name,
-                 pipeline_configuration,
                  log_level,
                  *args,
                  environment=None,
