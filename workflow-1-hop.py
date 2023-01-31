@@ -29,6 +29,6 @@ job = HopWorkflowOperator(
     task_id='tsk-workflow-1-hop',
     workflow='INTEGRACAO/workflow.hwf',
     project_name='LIVE',
-    pipeline_configuration='pipeline-server'
+    pipeline_configuration='pipeline-server',
     log_level= 'Basic'
 )
