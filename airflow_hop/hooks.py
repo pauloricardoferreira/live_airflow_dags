@@ -51,6 +51,7 @@ class HopHook(BaseHook):
                 password,
                 log_level,
                 hop_config,
+                pipeline_configuration,
                 project_name,
                 environment):
             self.host = host
@@ -60,7 +61,8 @@ class HopHook(BaseHook):
             self.log_level = log_level
             self.hop_config = hop_config
             self.project_name = project_name
-            self.environment = environment
+            self.environment = environment,
+            self.pipeline_configuration = pipeline_configuration
 
         def __get_url(self, endpoint):
             return f'http://{self.host}:{self.port}{endpoint}'
@@ -233,6 +235,7 @@ class HopHook(BaseHook):
     def __init__(
             self,
             project_name,
+            pipeline_configuration,
             environment_name,
             conn_id='hop_default',
             log_level='Basic'):
@@ -242,7 +245,7 @@ class HopHook(BaseHook):
         self.connection = self.get_connection(conn_id)
         self.extras = self.connection.extra_dejson
         self.log_level = log_level
-        self.extras = self.connection.extra_dejson
+        #self.extras = self.connection.extra_dejson
         self.project_name = project_name
         self.hop_client = None
         self.environment = environment_name
@@ -258,6 +261,7 @@ class HopHook(BaseHook):
             password=self.connection.password,
             log_level=self.log_level,
             hop_config=self.extras.get('hop_config'),
+            pipeline_configuration=self.extras.get('pipeline_configuration'),
             project_name=self.project_name,
             environment=self.environment)
             # environment=self.elf.extras.get('environment'))
