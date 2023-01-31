@@ -17,7 +17,7 @@ default_args = {
 }
 
 dag = DAG(
-    dag_id='dag-workflow-1-hop',
+    dag_id='dag-workflow-1-hop-hpl',
     default_args=default_args,
     schedule_interval='@once',
     catchup=False,
@@ -26,8 +26,8 @@ dag = DAG(
 
 job = HopWorkflowOperator(
     dag=dag,
-    task_id='tsk-workflow-1-hop',
-    workflow='INTEGRACAO/workflow.hwf',
+    task_id='tsk-workflow-1-hop-hpl',
+    workflow='INTEGRACAO/pipeline.hpl',
     project_name='LIVE',
     pipeline_configuration='pipeline-server'
     log_level= 'Basic'
