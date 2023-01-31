@@ -52,8 +52,7 @@ class XMLBuilder:
         # else:
         #     self.project_folder = f'{hop_home}/{self.project_home}'
 
-        #self.metastore_file = f'{self.project_folder}/metadata.json'
-        self.metastore_file = f'{self.project_folder}/pipeline-run-configuration/pipeline-server.json'
+        self.metastore_file = f'{self.project_folder}/metadata.json'
 
         with open(f'{self.project_folder}/{project["configFilename"]}') as file:
             project_data = json.load(file)
