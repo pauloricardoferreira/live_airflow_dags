@@ -6,7 +6,7 @@ from airflow_hop.operators import HopWorkflowOperator
 local_tz=pendulum.timezone('America/Sao_Paulo')
 
 default_args = {
-    'owner': 'Agroterenas',
+    'owner': 'Empresa',
     'depends_on_past': False,
     'start_date': datetime.today() - timedelta(days=1),  #datetime(2021, 3, 13, 0, tzinfo=local_tz), datetime(yyyy,mm,dd,hh,mn,sc, tzinfo=local_tz),
     'email': ['admin@gmail.com'],
@@ -31,3 +31,4 @@ job = HopWorkflowOperator(
     project_name='LIVE',
     log_level= 'Basic'
 )
+
