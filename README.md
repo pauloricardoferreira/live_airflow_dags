@@ -44,6 +44,7 @@ job = HopWorkflowOperator(
     task_id='tsk-workflow-2-hop', #nome da task
     workflow='INTEGRACAO/workflow.hwf', #caminho relativo até o artefato Hop
     project_name='LIVE', #nome do projeto, que é utilizado para encontrar as variaveis utilizadas no ambiente
+    environment: "hop-live-prd", #nome do arquivo onde contém as variáveis de configuração do projeto
     log_level= 'Basic' #nível do log
 )
 ```

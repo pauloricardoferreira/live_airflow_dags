@@ -27,7 +27,8 @@ dag = DAG(
 job = HopWorkflowOperator(
     dag=dag,
     task_id='tsk-workflow-1-hop',
-    workflow='INTEGRACAO/workflow.hwf',
+    workflow='INTEGRACAO/workflow-input.hwf',
     project_name='live_repo',
+    environment='hop-live-prd',
     log_level= 'Basic'
 )
