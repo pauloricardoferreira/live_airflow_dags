@@ -28,6 +28,6 @@ job = HopWorkflowOperator(
     dag=dag,
     task_id='tsk-workflow-2-hop',
     workflow='INTEGRACAO/workflow.hwf',
-    project_name='LIVE',
+    project_name='live_repo',
     log_level= 'Basic'
 )
