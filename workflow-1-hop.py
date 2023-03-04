@@ -30,6 +30,6 @@ job = HopWorkflowOperator(
     task_id='tsk-workflow-1-hop',
     workflow='INTEGRACAO/workflow.hwf',
     project_name='live_hop',
-    environment='hop-repo-prd',
+    environment='hop-live-prd',
     log_level= 'Basic'
 )
