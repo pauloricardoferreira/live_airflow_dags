@@ -1,53 +1,51 @@
-## Conteúdo do repositório
-___
+Olá, neste repositório você vai encontrar 2 exemplos da DAG's para utilizar em projetos com Apache Airflow e Apache Hop
 
 <br>
 
-- ### Pasta airflow_hop
-    aqui contem o pluguin utilizado para que o Apache Airfloe se comunica com o Apache Hop
+Páginas Oficiais dos Projetos
+ - [Apache Hop](https://hop.apache.org/)
+ - [Apache Airflow](https://airflow.apache.org/)
 
 <br>
-
-### Exemplo de DAG com comentários
 
 ```python
+#importação de bibliotecas básicas
 import pendulum
 from datetime import datetime, timedelta
 from airflow import DAG
 from airflow_hop.operators import HopWorkflowOperator
 
+#definição do TimeZone
 local_tz=pendulum.timezone('America/Sao_Paulo')
 
+#Arquimenstos Padrão da DAG
 default_args = {
-    'owner': 'Empresa', #Dono 
-    'depends_on_past': False,
-    'start_date': datetime.today() - timedelta(days=1),  #desta forma o airfloe entende que precisa ser criado a execução a partir do dia anterior da publicação
-    #'start_date': datetime(2021, 3, 13, 0, tzinfo=local_tz), datetime(yyyy,mm,dd,hh,mn,sc, tzinfo=local_tz),
-    #o parametro start_date acima, é normalmente utilizado, dessa forma o Airflow criar diversas agendamentos a partir dessa data
-    'email': ['admin@gmail.com'],
-    'email_on_failure': False, #caso a execução falhe, envia um email -> é necessário configurar na interface
-    'email_on_retry': False, #caso a execução execute novamente após a falha, envia um email -> é necessário configurar na interface
-    'retries': 0, #numero de tentativas em caso de falha
-    'retry_delay': timedelta(seconds=30) #tempo par uma nova tentativa de execução
+    'owner': 'Live',                                            #Dono
+    'depends_on_past': False,                                   #Não executa o passado
+    'start_date': datetime(2021, 3, 13, 0, tzinfo=local_tz),    #Data de Inicio de Ezecução
+    'email': ['admin@gmail.com'],                               #E-mail
+    'email_on_failure': False,                                  #Envia e-mail em caso de falha
+    'email_on_retry': False,                                    #Envia e-mail em caso de nova tentativa de ezecução
+    'retries': 0,                                               #Tentativas de execução caso falhe
+    'retry_delay': timedelta(seconds=30)                        #Intervalo entre a falha e nova tentativa
 }
 
+#Definição da DAG
 dag = DAG(
-    dag_id='dag-workflow-2-hop', #nome da DAG
-    default_args=default_args, #argumentos definidos acima
-    schedule_interval='0 1 * * *', #agendamento -> par amais detalhes visite https://crontab.guru/
-    catchup=False, #este parametro não permite que o airflow cria uma sequência de execuções
-    tags=['docker', 'hop'] #tag para melhor identificação dos processos e também para filtrar
+    dag_id='dag-workflow-1-hop',    #ID da DAG, esse ID é exibido na Aplicação Web do Airflow
+    default_args=default_args,      #Carrega os argumentos default
+    schedule_interval='@once',      #Intervalo de execução, sintax cron schedule_interval='0 1 * * *'
+    catchup=False,                  #Não cria execuções futuras, apenas a próxima a partir da data de inicio
+    tags=['docker', 'hop']          #tags para identificação e filtros no Airflow Webserver
 )
 
+#Definição da Task
 job = HopWorkflowOperator(
-    dag=dag,
-    task_id='tsk-workflow-2-hop', #nome da task
-    workflow='INTEGRACAO/workflow.hwf', #caminho relativo até o artefato Hop
-    project_name='LIVE', #nome do projeto, que é utilizado para encontrar as variaveis utilizadas no ambiente
-    environment: "hop-live-prd", #nome do arquivo onde contém as variáveis de configuração do projeto
-    log_level= 'Basic' #nível do log
+    dag=dag,                                #Carrega a DAGs
+    task_id='tsk-workflow-1-hop',           #ID da task exibida no Airflow Webserver
+    workflow='INTEGRACAO/workflow.hwf',     #Caminho Relativo até o Workflow Hop
+    project_name='live_hop',                #Nome do Projeto Hop
+    environment='hop-repo-prd',             #Nome do arquivo e variavel utilizada no Hop
+    log_level= 'Basic'                      #Tipo de Log
 )
 ```
-
-- Arquivos DAGS
-    workflow-1-hop.py, workflow-2-hop.py
