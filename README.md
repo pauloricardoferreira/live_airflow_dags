@@ -5,7 +5,6 @@ Neste repositório você vai encontrar 2 exemplos da DAG's para utilizar em proj
 <br>
 
 Páginas Oficiais dos Projetos
- - [Apache Hop](https://hop.apache.org/)
  - [Apache Airflow](https://airflow.apache.org/)
 
 <br>
