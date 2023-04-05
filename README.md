@@ -47,6 +47,7 @@ job = HopWorkflowOperator(
     workflow='INTEGRACAO/workflow.hwf',     #Caminho Relativo até o Workflow Hop
     project_name='live_hop',                #Nome do Projeto Hop
     environment='hop-repo-prd',             #Nome do arquivo e variavel utilizada no Hop
-    log_level= 'Basic'                      #Tipo de Log
+    log_level= 'Basic',                     #Tipo de Log
+    hop_conn_id= 'hop_default'              #Nome da conexão Criada no Airflow, que aponta para o hop, caso não seja passado é considerado a padrão 'hop_default'
 )
 ```
