@@ -6,11 +6,11 @@ from airflow_hop.operators import HopWorkflowOperator
 local_tz=pendulum.timezone('America/Sao_Paulo')
 
 default_args = {
-    'owner': 'Live',
+    'owner': 'Paulo',
     'depends_on_past': False,
     #'start_date': datetime.today() - timedelta(days=1),  #datetime(2021, 3, 13, 0, tzinfo=local_tz), datetime(yyyy,mm,dd,hh,mn,sc, tzinfo=local_tz),
     'start_date': datetime(2021, 3, 13, 0, tzinfo=local_tz), #datetime(yyyy,mm,dd,hh,mn,sc, tzinfo=local_tz),
-    'email': ['admin@gmail.com'],
+    'email': ['@EMAIL'],
     'email_on_failure': False,
     'email_on_retry': False,
     'retries': 0,
@@ -18,18 +18,21 @@ default_args = {
 }
 
 dag = DAG(
-    dag_id='dag-workflow-1-hop',
+    dag_id='dag-workflow-input-hop',
     default_args=default_args,
-    schedule_interval='@once',
+    schedule_interval='0 3 4-6 * *',
     catchup=False,
-    tags=['docker', 'hop']
+    tags=['principal']
 )
 
 job = HopWorkflowOperator(
     dag=dag,
-    task_id='tsk-workflow-1-hop',
+    task_id='tsk-workflow-input-hop',
     workflow='INTEGRACAO/workflow-input.hwf',
+    project_path='/opt/projetos/live_hop',
     project_name='live_hop',
-    environment='hop-live-prd',
+    environment_path='/opt/projetos/live_hop/env/prd',
+    environment_name='hop-live-prd',
+    hop_config_path='/opt/projetos/hop_config',
     log_level= 'Basic'
 )
